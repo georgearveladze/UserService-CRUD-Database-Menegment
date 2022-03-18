@@ -1,23 +1,23 @@
-const login = require('../user/login');
-const signup = require('../user/register');
-const updater = require('../user/update');
-const basicAuth = require('../service/authControler');
-const { Router } = require('express');
-const router = Router();
-const validator = require('../utils/uservalidation/validation');
-const paginatedResults = require('../user/pagination');
-const userdelete = require('../user/userdelete');
-const adminvalidation = require('../service/verifyToken');
-const ifUnmodifiedSince = require('../service/ifUnmodifiedSince');
+const login = require('../user/login')
+const signup = require('../user/register')
+const updater = require('../user/update')
+const { Router } = require('express')
+const router = Router()
+const validator = require('../service/validation')
+const paginatedResults = require('../user/pagination')
+const userdelete = require('../user/userdelete')
+const adminvalidation = require('../middleware/verifyToken')
+const ifUnmodifiedSince = require('../middleware/ifUnmodifiedSince')
+const verifyToken = require('../middleware/verifyToken')
 
-router.post('/signup', validator, signup);
+router.post('/signup', validator, signup)
 
-router.post('/login', login);
+router.post('/login', login)
 
-router.put('/update', adminvalidation, ifUnmodifiedSince, updater);
+router.put('/update', verifyToken, adminvalidation, ifUnmodifiedSince, updater)
 
-router.get('/list', paginatedResults);
+router.delete('/delete', verifyToken, userdelete)
 
-router.delete('/delete', basicAuth, userdelete);
+router.get('/list', paginatedResults)
 
-module.exports = router;
+module.exports = router

@@ -1,6 +1,6 @@
-const { check } = require('express-validator');
+const { check } = require('express-validator')
 
-const User = require('../../models/User');
+const User = require('../models/User')
 
 module.exports = [
   check('firstname', 'firstname at least should be 3 charecter')
@@ -15,7 +15,7 @@ module.exports = [
     })
     .notEmpty()
     .isAlpha(),
-  check('username', 'Please provide nickname')
+  check('username', 'Please provide username')
     .notEmpty()
     .isLength({
       min: 3,
@@ -23,11 +23,11 @@ module.exports = [
     .custom((username) => {
       return User.findOne({ username: username }).then((user) => {
         if (user) {
-          return Promise.reject('Nickname is already taken');
+          return Promise.reject('username is already taken')
         }
-      });
+      })
     }),
   check('password', 'Password at least should be 6 charecter').isLength({
     min: 6,
   }),
-];
+]
