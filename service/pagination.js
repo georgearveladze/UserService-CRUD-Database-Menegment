@@ -1,4 +1,4 @@
-const { getActiveUser } = require('../service/dataBaseManagment')
+const { getActiveUser } = require('./dataBaseManagment')
 
 module.exports = async (req, res) => {
   try {
