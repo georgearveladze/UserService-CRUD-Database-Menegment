@@ -3,10 +3,6 @@ const jwt = require('jsonwebtoken')
 
 module.exports = async (req, res) => {
   try {
-    const { hashed } = await hash(req.body.password, user.salt)
-    if (user.password !== hashed) {
-      return res.status(401).send({ err: "'Wrong credentials!'" })
-    }
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.TOKEN_SECRET,
