@@ -9,12 +9,12 @@ const userdelete = require('../user/userdelete')
 const adminvalidation = require('../middleware/verifyToken')
 const ifUnmodifiedSince = require('../middleware/ifUnmodifiedSince')
 const verifyToken = require('../middleware/verifyToken')
-const LoginCheck = require('../middleware/loginMiddlewere')
+const loginValidation = require('../middleware/loginValidation')
 const deleteValidations = require('../middleware/registerValidation')
 
 router.post('/signup', deleteValidations, validator, signup)
 
-router.post('/login', LoginCheck, login)
+router.post('/login', loginValidation, login)
 
 router.put('/update', verifyToken, adminvalidation, ifUnmodifiedSince, updater)
 

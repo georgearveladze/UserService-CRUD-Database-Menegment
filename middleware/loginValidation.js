@@ -1,5 +1,6 @@
 const passwordHash = require('../service/hash')
-const getUserByUsername = require('../service/getUserByUsername')
+const getUserByUsername = require('../service/dataBaseManagment')
+
 module.exports = async (req, res, next) => {
   try {
     const user = await getUserByUsername(req.body.nickname)
